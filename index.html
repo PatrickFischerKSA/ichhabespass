@@ -3,223 +3,309 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Ich habe Spass, ich schwör – Lernstrecke</title>
 
 <style>
 * { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Helvetica, Arial, sans-serif;
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   background:
     linear-gradient(rgba(10,12,18,.88), rgba(10,12,18,.96)),
-    url("images/alone at a party.jpg") center / cover fixed;
-  color: #e8ecff;
-  line-height: 1.6;
+    url("images/alone at a party.jpg") center/cover fixed;
+  color:#e8ecff;
+  line-height:1.6;
 }
 
-main {
-  max-width: 980px;
-  margin: auto;
-  padding: 3rem 1.5rem 6rem;
+main{
+  max-width:980px;
+  margin:auto;
+  padding:3rem 1.5rem 6rem;
 }
 
-section { margin-bottom: 6rem; }
+section{ margin-bottom:6rem; }
 
-h1 { font-size: 2.2rem; font-weight: 500; }
-h2 { font-size: 1.6rem; font-weight: 500; margin-bottom: 1.2rem; }
-
-p { max-width: 65ch; }
-
-.fade {
-  opacity: .75;
-  font-style: italic;
+h1,h2{
+  font-weight:500;
+  letter-spacing:.03em;
 }
 
-blockquote {
-  margin: 2rem 0;
-  padding-left: 1.5rem;
-  border-left: 3px solid rgba(143,255,210,.6);
-  font-style: italic;
+h1{ font-size:2.2rem; margin:0 0 1rem; }
+h2{ font-size:1.6rem; margin:0 0 1.2rem; }
+
+p{ max-width:70ch; opacity:.95; }
+
+.fade{ opacity:.75; font-style:italic; }
+
+blockquote{
+  margin:2rem 0;
+  padding-left:1.5rem;
+  border-left:3px solid rgba(143,255,210,.6);
+  font-style:italic;
+  opacity:.9;
 }
 
-img, video {
-  width: 100%;
-  border-radius: 26px;
-  margin: 2.5rem 0;
+img, video{
+  width:100%;
+  border-radius:26px;
+  margin:2.5rem 0;
 }
 
-img.portrait { max-width: 280px; }
+img.portrait{
+  max-width:280px;
+  width:100%;
+  margin:2rem 0 1rem;
+}
 
-textarea {
-  width: 100%;
-  min-height: 140px;
-  margin-top: 1.2rem;
-  padding: 1rem 1.2rem;
-  font-size: 1rem;
-  border-radius: 18px;
-  border: none;
+iframe{
+  width:100%;
+  height:900px;
+  border:none;
+  border-radius:26px;
+  background:#000;
+  margin:3rem 0 1.2rem;
+}
+
+/* ====== Schreibblock ====== */
+.writer{
+  margin-top:1.4rem;
+  background: rgba(20,24,38,.60);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+  padding:1rem 1rem 1.1rem;
+}
+
+textarea{
+  width:100%;
+  min-height:140px;
+  padding:1rem 1.2rem;
+  font-size:1rem;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.12);
   background: rgba(20,24,38,.85);
-  color: #e8ecff;
-  resize: vertical;
+  color:#e8ecff;
+  resize:vertical;
+  outline:none;
+}
+textarea::placeholder{ color: rgba(232,236,255,.55); }
+textarea:focus{ border-color: rgba(143,255,210,.35); }
+
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-top:.9rem;
 }
 
-textarea::placeholder { color: rgba(232,236,255,.55); }
+.btn{
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(15,18,30,.75);
+  color:#e8ecff;
+  padding:.55rem .85rem;
+  border-radius:14px;
+  font-size:.95rem;
+  transition: transform .08s ease, background .2s ease, border-color .2s ease;
+  user-select:none;
+}
+.btn:hover{ background: rgba(15,18,30,.92); border-color: rgba(143,255,210,.35); }
+.btn:active{ transform: translateY(1px); }
 
-.comment {
-  margin-top: .6rem;
-  font-size: .9rem;
-  opacity: .75;
-  max-width: 70ch;
+.btn.primary{
+  border-color: rgba(143,255,210,.35);
+  background: linear-gradient(135deg, rgba(143,255,210,.16), rgba(255,118,200,.12));
+}
+.btn.ghost{
+  background: transparent;
+  border-color: rgba(255,255,255,.14);
+}
+.btn.danger{
+  border-color: rgba(255,107,107,.35);
 }
 
-iframe {
-  width: 100%;
-  height: 900px;
-  border: none;
-  border-radius: 26px;
-  background: #000;
-  margin: 3rem 0;
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:.35rem .6rem;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.18);
+  font-size:.85rem;
+  opacity:.85;
 }
 
-.separator {
-  height: 1px;
+.feedback{
+  font-size:.92rem;
+  opacity:.85;
+}
+
+.comment{
+  display:none;
+  margin-top: .95rem;
+  padding: .95rem 1.05rem;
+  border-radius:18px;
+  background: rgba(143,255,210,.08);
+  border:1px solid rgba(143,255,210,.18);
+  max-width: 85ch;
+}
+.comment strong{
+  display:block;
+  margin-bottom:.35rem;
+  letter-spacing:.02em;
+}
+.comment ul{
+  margin:.35rem 0 0 1.1rem;
+  padding:0;
+}
+.comment li{ margin:.25rem 0; }
+
+.separator{
+  height:1px;
   background: rgba(255,255,255,.15);
-  margin: 4rem 0;
+  margin:4rem 0;
+}
+
+/* ====== Topbar ====== */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter: blur(10px);
+  background: rgba(10,12,18,.70);
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.topbar-inner{
+  max-width:980px;
+  margin:auto;
+  padding:.85rem 1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.small{
+  font-size:.9rem;
+  opacity:.8;
+  max-width: 60ch;
 }
 </style>
 </head>
 
 <body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div>
+      <div style="font-weight:600; letter-spacing:.12em;">LERNSTRECKE</div>
+      <div class="small">Abschicken = festhalten. Danach erst erscheinen die Denkanstösse.</div>
+    </div>
+    <div class="controls" style="margin:0;">
+      <span class="badge" id="progressBadge">0/5 abgegeben</span>
+      <button class="btn primary" id="exportBtn">Export (TXT)</button>
+      <button class="btn danger" id="resetBtn">Reset</button>
+    </div>
+  </div>
+</div>
+
 <main>
 
-<!-- TITEL -->
 <section>
   <h1>Ich habe Spass, ich schwör</h1>
-  <p class="fade">
-    Lies den Text nicht als Meinung, sondern als Angebot zur Selbstprüfung.
-  </p>
+  <p class="fade">Lies den Text nicht als Meinung, sondern als Angebot zur Selbstprüfung.</p>
 </section>
 
 <!-- MODUL 0 -->
 <section>
   <img src="images/alone at a party.jpg" alt="Allein in einer Menge">
 
-  <p>
-    Man kann mitten unter Menschen stehen<br>
-    und sich trotzdem isoliert fühlen.
-  </p>
+  <p>Man kann mitten unter Menschen stehen<br>und sich trotzdem isoliert fühlen.</p>
 
-  <textarea placeholder="Wann hattest du zuletzt Spass – ohne Zweck, ohne Leistung, ohne Publikum?"></textarea>
-  <div class="comment">
-    Versuche, **nicht** von einem Event zu schreiben („Ferien“, „Party“),  
-    sondern von einem **Moment**.  
-    Woran hast du gemerkt, dass du nichts beweisen musstest?
+  <div class="writer">
+    <textarea data-id="m0_q1" placeholder="Wann hattest du zuletzt Spass – ohne Zweck, ohne Leistung, ohne Publikum?"></textarea>
+
+    <div class="controls">
+      <button class="btn primary" data-submit="m0_q1">Abschicken</button>
+      <button class="btn ghost" data-edit="m0_q1">Bearbeiten</button>
+      <span class="feedback" id="fb_m0_q1"></span>
+    </div>
+
+    <div class="comment" id="c_m0_q1">
+      <strong>Denkstoss (nach Abschicken):</strong>
+      <ul>
+        <li>Beschreibe einen <em>Moment</em>, kein Event.</li>
+        <li>Woran hast du gemerkt, dass du nichts beweisen musstest?</li>
+        <li>Wo entsteht hier Resonanz – und warum?</li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <!-- MODUL 1 -->
 <section>
   <h2>Der Text</h2>
-
-  <p>
-    Lies langsam. Nicht zustimmend. Nicht ablehnend.
-    Prüfe, wo du dich wiedererkennst – und wo du innerlich blockierst.
-  </p>
-
   <iframe src="./pdf/republik-2026-01-01-ich-habe-spass-ich-schwoer.pdf" loading="lazy"></iframe>
-
-  <p class="fade">
-    Wenn das PDF nicht lädt: Pfad oder Dateiname stimmen nicht 1:1.
-  </p>
 </section>
 
-<!-- MODUL 2 -->
+<!-- MODUL 2 – ROSA -->
 <section>
   <h2>Warum Spass sich nicht machen lässt</h2>
 
   <img src="images/Hartmut_Rosa.jpg" class="portrait" alt="Hartmut Rosa">
 
-  <p>
-    Hartmut Rosa beschreibt eine Gesellschaft,
-    die immer schneller, dichter, lauter wird.
-  </p>
-
-  <blockquote>
-    Resonanz lässt sich nicht erzwingen.
-  </blockquote>
+  <blockquote>Resonanz lässt sich nicht erzwingen.</blockquote>
 
   <video autoplay loop muted playsinline>
     <source src="videos/crowd_loop.mp4" type="video/mp4">
   </video>
 
-  <textarea placeholder="Wo hast du versucht, Spass herzustellen – und gemerkt, dass genau das ihn zerstört?"></textarea>
-  <div class="comment">
-    Beschreibe **nicht nur das Scheitern**, sondern auch deine **Absicht**:  
-    Was wolltest du kontrollieren? Stimmung? Zugehörigkeit? Wirkung auf andere?  
-    Wo passt Rosas Idee der „Unverfügbarkeit“ hier?
+  <div class="writer">
+    <textarea data-id="m2_q1" placeholder="Wo hast du versucht, Spass herzustellen – und gemerkt, dass genau das ihn zerstört?"></textarea>
+
+    <div class="controls">
+      <button class="btn primary" data-submit="m2_q1">Abschicken</button>
+      <button class="btn ghost" data-edit="m2_q1">Bearbeiten</button>
+      <span class="feedback" id="fb_m2_q1"></span>
+    </div>
+
+    <div class="comment" id="c_m2_q1">
+      <strong>Denkstoss (nach Abschicken):</strong>
+      <ul>
+        <li>Was wolltest du kontrollieren?</li>
+        <li>Wer war dein Publikum?</li>
+        <li>Was wäre passiert, wenn du nichts gesteuert hättest?</li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<!-- MODUL 3 -->
+<!-- MODUL 3 – STRÖMQUIST -->
 <section>
   <h2>Wenn Spass zur Pflicht wird</h2>
 
   <img src="images/LivStroemquist.jpg" class="portrait" alt="Liv Strömquist">
-
-  <p>
-    Liv Strömquist zeigt:
-    Glück und Spass werden versprochen,
-    verkauft und bewertet.
-  </p>
-
   <img src="images/phone glow dark room.jpg" alt="Handylicht im Dunkeln">
   <img src="gifs/scrolling.gif" alt="Endloses Scrollen">
 
-  <textarea placeholder="Wo fühlst du dich unter Druck, Spass zu haben oder ihn zu zeigen?"></textarea>
-  <div class="comment">
-    Frage dich:  
-    Geht der Druck **von anderen** aus – oder hast du ihn bereits verinnerlicht?  
-    Was würde passieren, wenn du diesen Spass **nicht** zeigen würdest?
-  </div>
-</section>
+  <div class="writer">
+    <textarea data-id="m3_q1" placeholder="Wo fühlst du dich unter Druck, Spass zu haben oder ihn zu zeigen?"></textarea>
 
-<!-- MODUL 4 -->
-<section>
-  <img src="images/selbstwahrnehmung meditation poster.jpg" alt="Meditation und Selbstoptimierung">
+    <div class="controls">
+      <button class="btn primary" data-submit="m3_q1">Abschicken</button>
+      <button class="btn ghost" data-edit="m3_q1">Bearbeiten</button>
+      <span class="feedback" id="fb_m3_q1"></span>
+    </div>
 
-  <p class="fade">
-    Ruhe ist kein Garant für Verbundenheit.
-    Achtsamkeit ist kein Ersatz für Beziehung.
-  </p>
-
-  <textarea placeholder="Wo merkst du, dass Selbstoptimierung dir eher Distanz als Nähe bringt?"></textarea>
-  <div class="comment">
-    Gemeint ist nicht: „Meditation ist schlecht“,  
-    sondern: **Was wird individualisiert, obwohl es ein Beziehungsproblem ist?**  
-    Wo wirst du für etwas verantwortlich gemacht, das strukturell bedingt ist?
-  </div>
-</section>
-
-<!-- MODUL 5 -->
-<section>
-  <h2>Derselbe Abend – zwei Körper</h2>
-
-  <img src="images/A solitary person leaving a nightclub.jpg" alt="Allein nach der Party">
-
-  <textarea placeholder="Körper 1: Wo war hier Spass?"></textarea>
-  <div class="comment">
-    Beschreibe Wahrnehmung: Geräusche, Nähe, Blicke, Sicherheit.  
-    Was fühlt sich **selbstverständlich** an?
-  </div>
-
-  <textarea placeholder="Körper 2: Wo kippte es?"></textarea>
-  <div class="comment">
-    Achte darauf, **nicht zu moralisieren**.  
-    Beschreibe Differenz, nicht Schuld.  
-    Was verändert sich – obwohl der Raum derselbe bleibt?
+    <div class="comment" id="c_m3_q1">
+      <strong>Denkstoss (nach Abschicken):</strong>
+      <ul>
+        <li>Woher kommt der Druck?</li>
+        <li>Was ist hier das Produkt?</li>
+        <li>Was passiert, wenn du nicht mitmachst?</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -227,19 +313,103 @@ iframe {
 <section>
   <div class="separator"></div>
 
-  <p>
-    Wenn du jetzt unsicherer bist als am Anfang,<br>
-    hast du ernsthaft gearbeitet.
-  </p>
+  <div class="writer">
+    <textarea data-id="end_q1" placeholder="Was nimmst du mit – ohne es aufzulösen?"></textarea>
 
-  <textarea placeholder="Was nimmst du mit – ohne es aufzulösen?"></textarea>
-  <div class="comment">
-    Widerstehe dem Impuls, ein Fazit zu formulieren.  
-    Halte stattdessen eine **offene Spannung** fest:  
-    zwischen Freiheit und Schutz, Lust und Verantwortung, Individuum und Struktur.
+    <div class="controls">
+      <button class="btn primary" data-submit="end_q1">Abschicken</button>
+      <button class="btn ghost" data-edit="end_q1">Bearbeiten</button>
+      <span class="feedback" id="fb_end_q1"></span>
+    </div>
+
+    <div class="comment" id="c_end_q1">
+      <strong>Denkstoss (nach Abschicken):</strong>
+      <ul>
+        <li>Halte eine Spannung fest, kein Fazit.</li>
+        <li>Zwischen Freiheit und Schutz.</li>
+        <li>Zwischen Lust und Verantwortung.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
 </main>
+
+<script>
+const STORE_KEY = "ichhabespass_submit_v2";
+let state = JSON.parse(localStorage.getItem(STORE_KEY)) || { values:{}, submitted:{} };
+
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); updateProgress(); }
+
+function updateProgress(){
+  const ids = [...new Set([...document.querySelectorAll("textarea[data-id]")].map(t=>t.dataset.id))];
+  const done = ids.filter(id => state.submitted[id]).length;
+  document.getElementById("progressBadge").textContent = `${done}/${ids.length} abgegeben`;
+}
+
+function init(){
+  document.querySelectorAll("textarea[data-id]").forEach(ta=>{
+    const id = ta.dataset.id;
+    if(state.values[id]) ta.value = state.values[id];
+    if(state.submitted[id]){
+      ta.disabled = true;
+      document.getElementById("c_"+id).style.display = "block";
+      document.getElementById("fb_"+id).textContent = "Abgeschickt ✔";
+    }
+    ta.addEventListener("input", ()=>{ state.values[id]=ta.value; save(); });
+  });
+
+  document.querySelectorAll("[data-submit]").forEach(b=>{
+    b.onclick = ()=>{
+      const id = b.dataset.submit;
+      const ta = document.querySelector(`textarea[data-id="${id}"]`);
+      if(ta.value.trim().length < 12){
+        document.getElementById("fb_"+id).textContent = "Zu kurz – bitte konkret schreiben.";
+        return;
+      }
+      state.submitted[id]=true;
+      save();
+      ta.disabled = true;
+      document.getElementById("c_"+id).style.display = "block";
+      document.getElementById("fb_"+id).textContent = "Abgeschickt ✔";
+    };
+  });
+
+  document.querySelectorAll("[data-edit]").forEach(b=>{
+    b.onclick = ()=>{
+      const id = b.dataset.edit;
+      state.submitted[id]=false;
+      save();
+      const ta = document.querySelector(`textarea[data-id="${id}"]`);
+      ta.disabled = false;
+      document.getElementById("c_"+id).style.display = "none";
+      document.getElementById("fb_"+id).textContent = "Bearbeiten aktiv …";
+    };
+  });
+
+  document.getElementById("exportBtn").onclick = exportTxt;
+  document.getElementById("resetBtn").onclick = ()=>{
+    if(confirm("Alles löschen?")){ localStorage.removeItem(STORE_KEY); location.reload(); }
+  };
+
+  updateProgress();
+}
+
+function exportTxt(){
+  let out = "Ich habe Spass, ich schwör – Export\n\n";
+  Object.keys(state.values).forEach(id=>{
+    out += `### ${id} (${state.submitted[id]?"abgeschickt":"Entwurf"})\n`;
+    out += state.values[id] + "\n\n";
+  });
+  const blob = new Blob([out],{type:"text/plain"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "lernstrecke_export.txt";
+  a.click();
+}
+
+init();
+</script>
+
 </body>
 </html>
