@@ -7,12 +7,7 @@
 <title>Ich habe Spass, ich schwör – Lernstrecke</title>
 
 <style>
-/* =====================================================
-   GRUNDHALTUNG
-   ===================================================== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -25,37 +20,22 @@ body {
   line-height: 1.6;
 }
 
-/* =====================================================
-   LAYOUT
-   ===================================================== */
 main {
   max-width: 980px;
   margin: auto;
   padding: 3rem 1.5rem 6rem;
 }
 
-section {
-  margin-bottom: 6rem;
-}
+section { margin-bottom: 6rem; }
 
-h1, h2 {
-  font-weight: 500;
-  letter-spacing: .03em;
-}
+h1 { font-size: 2.2rem; font-weight: 500; }
+h2 { font-size: 1.6rem; font-weight: 500; margin-bottom: 1.2rem; }
 
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-}
+p { max-width: 65ch; }
 
-h2 {
-  font-size: 1.6rem;
-  margin-bottom: 1.2rem;
-}
-
-p {
-  max-width: 65ch;
-  opacity: .95;
+.fade {
+  opacity: .75;
+  font-style: italic;
 }
 
 blockquote {
@@ -63,34 +43,20 @@ blockquote {
   padding-left: 1.5rem;
   border-left: 3px solid rgba(143,255,210,.6);
   font-style: italic;
-  opacity: .9;
 }
 
-/* =====================================================
-   MEDIEN
-   ===================================================== */
 img, video {
   width: 100%;
   border-radius: 26px;
   margin: 2.5rem 0;
 }
 
-img.portrait {
-  max-width: 280px;
-  margin: 2rem 0;
-}
+img.portrait { max-width: 280px; }
 
-video {
-  opacity: .85;
-}
-
-/* =====================================================
-   EINGABEN
-   ===================================================== */
 textarea {
   width: 100%;
   min-height: 140px;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   padding: 1rem 1.2rem;
   font-size: 1rem;
   border-radius: 18px;
@@ -100,13 +66,15 @@ textarea {
   resize: vertical;
 }
 
-textarea::placeholder {
-  color: rgba(232,236,255,.55);
+textarea::placeholder { color: rgba(232,236,255,.55); }
+
+.comment {
+  margin-top: .6rem;
+  font-size: .9rem;
+  opacity: .75;
+  max-width: 70ch;
 }
 
-/* =====================================================
-   PDF
-   ===================================================== */
 iframe {
   width: 100%;
   height: 900px;
@@ -116,29 +84,18 @@ iframe {
   margin: 3rem 0;
 }
 
-/* =====================================================
-   FEINHEIT
-   ===================================================== */
 .separator {
   height: 1px;
   background: rgba(255,255,255,.15);
   margin: 4rem 0;
 }
-
-.fade {
-  opacity: .7;
-  font-style: italic;
-}
 </style>
 </head>
 
 <body>
-
 <main>
 
-<!-- =====================================================
-     TITEL
-     ===================================================== -->
+<!-- TITEL -->
 <section>
   <h1>Ich habe Spass, ich schwör</h1>
   <p class="fade">
@@ -146,12 +103,9 @@ iframe {
   </p>
 </section>
 
-<!-- =====================================================
-     MODUL 0 – EINSTIEG
-     ===================================================== -->
+<!-- MODUL 0 -->
 <section>
-  <img src="images/alone at a party.jpg"
-       alt="Allein in einer Menge">
+  <img src="images/alone at a party.jpg" alt="Allein in einer Menge">
 
   <p>
     Man kann mitten unter Menschen stehen<br>
@@ -159,11 +113,14 @@ iframe {
   </p>
 
   <textarea placeholder="Wann hattest du zuletzt Spass – ohne Zweck, ohne Leistung, ohne Publikum?"></textarea>
+  <div class="comment">
+    Versuche, **nicht** von einem Event zu schreiben („Ferien“, „Party“),  
+    sondern von einem **Moment**.  
+    Woran hast du gemerkt, dass du nichts beweisen musstest?
+  </div>
 </section>
 
-<!-- =====================================================
-     MODUL 1 – ORIGINALTEXT
-     ===================================================== -->
+<!-- MODUL 1 -->
 <section>
   <h2>Der Text</h2>
 
@@ -172,25 +129,18 @@ iframe {
     Prüfe, wo du dich wiedererkennst – und wo du innerlich blockierst.
   </p>
 
-  <iframe
-    src="./pdf/republik-2026-01-01-ich-habe-spass-ich-schwoer.pdf"
-    loading="lazy">
-  </iframe>
+  <iframe src="./pdf/republik-2026-01-01-ich-habe-spass-ich-schwoer.pdf" loading="lazy"></iframe>
 
   <p class="fade">
     Wenn das PDF nicht lädt: Pfad oder Dateiname stimmen nicht 1:1.
   </p>
 </section>
 
-<!-- =====================================================
-     MODUL 2 – ROSA
-     ===================================================== -->
+<!-- MODUL 2 -->
 <section>
   <h2>Warum Spass sich nicht machen lässt</h2>
 
-  <img src="images/Hartmut_Rosa.jpg"
-       class="portrait"
-       alt="Hartmut Rosa">
+  <img src="images/Hartmut_Rosa.jpg" class="portrait" alt="Hartmut Rosa">
 
   <p>
     Hartmut Rosa beschreibt eine Gesellschaft,
@@ -206,17 +156,18 @@ iframe {
   </video>
 
   <textarea placeholder="Wo hast du versucht, Spass herzustellen – und gemerkt, dass genau das ihn zerstört?"></textarea>
+  <div class="comment">
+    Beschreibe **nicht nur das Scheitern**, sondern auch deine **Absicht**:  
+    Was wolltest du kontrollieren? Stimmung? Zugehörigkeit? Wirkung auf andere?  
+    Wo passt Rosas Idee der „Unverfügbarkeit“ hier?
+  </div>
 </section>
 
-<!-- =====================================================
-     MODUL 3 – STRÖMQUIST
-     ===================================================== -->
+<!-- MODUL 3 -->
 <section>
   <h2>Wenn Spass zur Pflicht wird</h2>
 
-  <img src="images/LivStroemquist.jpg"
-       class="portrait"
-       alt="Liv Strömquist">
+  <img src="images/LivStroemquist.jpg" class="portrait" alt="Liv Strömquist">
 
   <p>
     Liv Strömquist zeigt:
@@ -224,44 +175,55 @@ iframe {
     verkauft und bewertet.
   </p>
 
-  <img src="images/phone glow dark room.jpg"
-       alt="Handylicht im Dunkeln">
-
-  <img src="gifs/scrolling.gif"
-       alt="Endloses Scrollen">
+  <img src="images/phone glow dark room.jpg" alt="Handylicht im Dunkeln">
+  <img src="gifs/scrolling.gif" alt="Endloses Scrollen">
 
   <textarea placeholder="Wo fühlst du dich unter Druck, Spass zu haben oder ihn zu zeigen?"></textarea>
+  <div class="comment">
+    Frage dich:  
+    Geht der Druck **von anderen** aus – oder hast du ihn bereits verinnerlicht?  
+    Was würde passieren, wenn du diesen Spass **nicht** zeigen würdest?
+  </div>
 </section>
 
-<!-- =====================================================
-     MODUL 4 – SELBSTOPTIMIERUNG
-     ===================================================== -->
+<!-- MODUL 4 -->
 <section>
-  <img src="images/selbstwahrnehmung meditation poster.jpg"
-       alt="Meditation und Selbstoptimierung">
+  <img src="images/selbstwahrnehmung meditation poster.jpg" alt="Meditation und Selbstoptimierung">
 
   <p class="fade">
     Ruhe ist kein Garant für Verbundenheit.
     Achtsamkeit ist kein Ersatz für Beziehung.
   </p>
+
+  <textarea placeholder="Wo merkst du, dass Selbstoptimierung dir eher Distanz als Nähe bringt?"></textarea>
+  <div class="comment">
+    Gemeint ist nicht: „Meditation ist schlecht“,  
+    sondern: **Was wird individualisiert, obwohl es ein Beziehungsproblem ist?**  
+    Wo wirst du für etwas verantwortlich gemacht, das strukturell bedingt ist?
+  </div>
 </section>
 
-<!-- =====================================================
-     MODUL 5 – PERSPEKTIVBRUCH
-     ===================================================== -->
+<!-- MODUL 5 -->
 <section>
   <h2>Derselbe Abend – zwei Körper</h2>
 
-  <img src="images/A solitary person leaving a nightclub.jpg"
-       alt="Allein nach der Party">
+  <img src="images/A solitary person leaving a nightclub.jpg" alt="Allein nach der Party">
 
   <textarea placeholder="Körper 1: Wo war hier Spass?"></textarea>
+  <div class="comment">
+    Beschreibe Wahrnehmung: Geräusche, Nähe, Blicke, Sicherheit.  
+    Was fühlt sich **selbstverständlich** an?
+  </div>
+
   <textarea placeholder="Körper 2: Wo kippte es?"></textarea>
+  <div class="comment">
+    Achte darauf, **nicht zu moralisieren**.  
+    Beschreibe Differenz, nicht Schuld.  
+    Was verändert sich – obwohl der Raum derselbe bleibt?
+  </div>
 </section>
 
-<!-- =====================================================
-     ABSCHLUSS
-     ===================================================== -->
+<!-- ABSCHLUSS -->
 <section>
   <div class="separator"></div>
 
@@ -271,9 +233,13 @@ iframe {
   </p>
 
   <textarea placeholder="Was nimmst du mit – ohne es aufzulösen?"></textarea>
+  <div class="comment">
+    Widerstehe dem Impuls, ein Fazit zu formulieren.  
+    Halte stattdessen eine **offene Spannung** fest:  
+    zwischen Freiheit und Schutz, Lust und Verantwortung, Individuum und Struktur.
+  </div>
 </section>
 
 </main>
-
 </body>
 </html>
