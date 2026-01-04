@@ -1,215 +1,276 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SPASS. KONTROLLE. FREIHEIT.</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Ich habe Spass, ich schwör – Lernstrecke</title>
 
 <style>
-/* ===============================
-   VISUELLES MOOD-UPGRADE
-   =============================== */
+/* =====================================================
+   GRUNDHALTUNG
+   ===================================================== */
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.85), rgba(10,12,18,.95)),
-    url("images/crowd_blur.jpg") center/cover fixed;
+    linear-gradient(rgba(10,12,18,.88), rgba(10,12,18,.96)),
+    url("images/alone at a party.jpg") center / cover fixed;
   color: #e8ecff;
+  line-height: 1.6;
 }
 
+/* =====================================================
+   LAYOUT
+   ===================================================== */
 main {
-  backdrop-filter: blur(6px);
+  max-width: 980px;
+  margin: auto;
+  padding: 3rem 1.5rem 6rem;
 }
 
-.mood {
+section {
+  margin-bottom: 6rem;
+}
+
+h1, h2 {
+  font-weight: 500;
+  letter-spacing: .03em;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+}
+
+p {
+  max-width: 65ch;
+  opacity: .95;
+}
+
+blockquote {
+  margin: 2rem 0;
+  padding-left: 1.5rem;
+  border-left: 3px solid rgba(143,255,210,.6);
+  font-style: italic;
+  opacity: .9;
+}
+
+/* =====================================================
+   MEDIEN
+   ===================================================== */
+img, video {
   width: 100%;
-  border-radius: 20px;
-  margin: 20px 0;
-  opacity: 0.9;
+  border-radius: 26px;
+  margin: 2.5rem 0;
 }
 
-.mood.small {
-  max-height: 260px;
-  object-fit: cover;
+img.portrait {
+  max-width: 280px;
+  margin: 2rem 0;
 }
 
-.video-loop {
+video {
+  opacity: .85;
+}
+
+/* =====================================================
+   EINGABEN
+   ===================================================== */
+textarea {
   width: 100%;
-  border-radius: 20px;
-  margin: 20px 0;
-  opacity: 0.85;
+  min-height: 140px;
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 18px;
+  border: none;
+  background: rgba(20,24,38,.85);
+  color: #e8ecff;
+  resize: vertical;
 }
 
-.card {
-  background: rgba(15,18,30,.85);
+textarea::placeholder {
+  color: rgba(232,236,255,.55);
 }
 
+/* =====================================================
+   PDF
+   ===================================================== */
 iframe {
+  width: 100%;
+  height: 900px;
+  border: none;
+  border-radius: 26px;
   background: #000;
+  margin: 3rem 0;
+}
+
+/* =====================================================
+   FEINHEIT
+   ===================================================== */
+.separator {
+  height: 1px;
+  background: rgba(255,255,255,.15);
+  margin: 4rem 0;
+}
+
+.fade {
+  opacity: .7;
+  font-style: italic;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div style="padding:20px; max-width:1100px; margin:auto;">
-    <h1 style="letter-spacing:.2em;">SPASS. KONTROLLE. FREIHEIT.</h1>
-    <p style="opacity:.8; max-width:60ch;">
-      Diese Lernstrecke ist kein Wohlfühlraum.  
-      Sie ist ein Spiegel. Und manchmal ein Schlag.
-    </p>
-  </div>
-</header>
+<main>
 
-<main style="max-width:1100px; margin:auto; padding:20px;">
-
-<!-- ===============================
-MODUL 0 – ATMOSPHÄRISCHER EINSTIEG
-=============================== -->
-
+<!-- =====================================================
+     TITEL
+     ===================================================== -->
 <section>
-  <h2>Bevor du liest</h2>
-
-  <img src="images/alone_party.jpg" class="mood small" alt="Allein an einer Party">
-
-  <p>
-    Viele sagen: <em>„Wir haben keinen Spass mehr.“</em><br>
-    Andere sagen: <em>„Wir hatten nie so viele Möglichkeiten.“</em>
-  </p>
-
-  <p><strong>Beides kann stimmen.</strong></p>
-
-  <textarea placeholder="Wann hattest du zuletzt Spass – ohne Zweck?"
-            style="width:100%; min-height:120px;"></textarea>
-</section>
-
-<!-- ===============================
-MODUL 1 – TEXT + PDF
-=============================== -->
-
-<section>
-  <h2>Der Text (Original)</h2>
-
-  <p>
+  <h1>Ich habe Spass, ich schwör</h1>
+  <p class="fade">
     Lies den Text nicht als Meinung, sondern als Angebot zur Selbstprüfung.
   </p>
+</section>
 
-  <!-- PDF INLINE -->
-  <iframe 
-    src="pdf/ich-habe-spass-ich-schwoer.pdf"
-    width="100%"
-    height="800"
-    style="border-radius:20px; border:none;">
+<!-- =====================================================
+     MODUL 0 – EINSTIEG
+     ===================================================== -->
+<section>
+  <img src="images/alone at a party.jpg"
+       alt="Allein in einer Menge">
+
+  <p>
+    Man kann mitten unter Menschen stehen<br>
+    und sich trotzdem isoliert fühlen.
+  </p>
+
+  <textarea placeholder="Wann hattest du zuletzt Spass – ohne Zweck, ohne Leistung, ohne Publikum?"></textarea>
+</section>
+
+<!-- =====================================================
+     MODUL 1 – ORIGINALTEXT
+     ===================================================== -->
+<section>
+  <h2>Der Text</h2>
+
+  <p>
+    Lies langsam. Nicht zustimmend. Nicht ablehnend.
+    Prüfe, wo du dich wiedererkennst – und wo du innerlich blockierst.
+  </p>
+
+  <iframe
+    src="./pdf/republik-2026-01-01-ich-habe-spass-ich-schwoer.pdf"
+    loading="lazy">
   </iframe>
 
-  <p style="opacity:.7;">
-    Tipp: Zoome hinein. Lies langsam. Markiere Stellen, die dich treffen oder nerven.
+  <p class="fade">
+    Wenn das PDF nicht lädt: Pfad oder Dateiname stimmen nicht 1:1.
   </p>
 </section>
 
-<!-- ===============================
-MODUL 2 – ROSA
-=============================== -->
-
+<!-- =====================================================
+     MODUL 2 – ROSA
+     ===================================================== -->
 <section>
   <h2>Warum Spass sich nicht machen lässt</h2>
 
-  <img src="images/rosa.jpg" class="mood small" alt="Hartmut Rosa">
-
-  <video class="video-loop" autoplay loop muted playsinline>
-    <source src="videos/crowd_loop.mp4" type="video/mp4">
-  </video>
+  <img src="images/Hartmut_Rosa.jpg"
+       class="portrait"
+       alt="Hartmut Rosa">
 
   <p>
-    Hartmut Rosa sagt: Gute Momente lassen sich nicht erzwingen.  
-    Wenn man sie plant, verlieren sie oft ihre Kraft.
+    Hartmut Rosa beschreibt eine Gesellschaft,
+    die immer schneller, dichter, lauter wird.
   </p>
 
   <blockquote>
-    „Resonanz ist unverfügbar.“
+    Resonanz lässt sich nicht erzwingen.
   </blockquote>
 
-  <textarea placeholder="Wann hast du versucht, Spass herzustellen – und es ist gescheitert?"
-            style="width:100%; min-height:120px;"></textarea>
+  <video autoplay loop muted playsinline>
+    <source src="videos/crowd_loop.mp4" type="video/mp4">
+  </video>
+
+  <textarea placeholder="Wo hast du versucht, Spass herzustellen – und gemerkt, dass genau das ihn zerstört?"></textarea>
 </section>
 
-<!-- ===============================
-MODUL 3 – STRÖMQUIST
-=============================== -->
-
+<!-- =====================================================
+     MODUL 3 – STRÖMQUIST
+     ===================================================== -->
 <section>
   <h2>Wenn Spass zur Pflicht wird</h2>
 
-  <img src="images/stroemquist.jpg" class="mood small" alt="Liv Strömquist">
-
-  <img src="gifs/scrolling.gif" class="mood" alt="Endloses Scrollen">
+  <img src="images/LivStroemquist.jpg"
+       class="portrait"
+       alt="Liv Strömquist">
 
   <p>
-    Liv Strömquist zeigt:  
-    Wir sollen glücklich, entspannt, erfüllt wirken – und fühlen uns kaputt,
-    wenn es nicht klappt.
+    Liv Strömquist zeigt:
+    Glück und Spass werden versprochen,
+    verkauft und bewertet.
   </p>
 
-  <textarea placeholder="Wo hast du das Gefühl, Spass leisten zu müssen?"
-            style="width:100%; min-height:120px;"></textarea>
+  <img src="images/phone glow dark room.jpg"
+       alt="Handylicht im Dunkeln">
+
+  <img src="gifs/scrolling.gif"
+       alt="Endloses Scrollen">
+
+  <textarea placeholder="Wo fühlst du dich unter Druck, Spass zu haben oder ihn zu zeigen?"></textarea>
 </section>
 
-<!-- ===============================
-MODUL 4 – AWARENESS
-=============================== -->
-
+<!-- =====================================================
+     MODUL 4 – SELBSTOPTIMIERUNG
+     ===================================================== -->
 <section>
-  <h2>Spass für wen?</h2>
+  <img src="images/selbstwahrnehmung meditation poster.jpg"
+       alt="Meditation und Selbstoptimierung">
 
-  <img src="images/awareness_poster.jpg" class="mood small" alt="Awareness Poster">
-
-  <p>
-    Manche brauchen Sicherheit, um loszulassen.  
-    Andere fühlen sich durch Regeln eingeschränkt.
+  <p class="fade">
+    Ruhe ist kein Garant für Verbundenheit.
+    Achtsamkeit ist kein Ersatz für Beziehung.
   </p>
-
-  <textarea placeholder="Wo fühlst du dich sicher genug, um dich gehen zu lassen?"
-            style="width:100%; min-height:120px;"></textarea>
 </section>
 
-<!-- ===============================
-MODUL 5 – PERSPEKTIVBRUCH
-=============================== -->
-
+<!-- =====================================================
+     MODUL 5 – PERSPEKTIVBRUCH
+     ===================================================== -->
 <section>
   <h2>Derselbe Abend – zwei Körper</h2>
 
-  <img src="images/club_exit.jpg" class="mood small" alt="Person verlässt Club">
+  <img src="images/A solitary person leaving a nightclub.jpg"
+       alt="Allein nach der Party">
 
-  <p>
-    Ein Raum. Zwei Erfahrungen.  
-    Nicht alle gehen mit demselben Gefühl nach Hause.
-  </p>
-
-  <textarea placeholder="Körper 1 – was ist hier Spass?"
-            style="width:100%; min-height:100px;"></textarea>
-
-  <textarea placeholder="Körper 2 – was kippt hier?"
-            style="width:100%; min-height:100px;"></textarea>
+  <textarea placeholder="Körper 1: Wo war hier Spass?"></textarea>
+  <textarea placeholder="Körper 2: Wo kippte es?"></textarea>
 </section>
 
-<!-- ===============================
-ABSCHLUSS
-=============================== -->
-
+<!-- =====================================================
+     ABSCHLUSS
+     ===================================================== -->
 <section>
-  <h2>Kein Fazit</h2>
+  <div class="separator"></div>
 
   <p>
-    Wenn du jetzt unsicherer bist als am Anfang,  
-    hast du gut gearbeitet.
+    Wenn du jetzt unsicherer bist als am Anfang,<br>
+    hast du ernsthaft gearbeitet.
   </p>
 
-  <textarea placeholder="Was nimmst du mit – ohne es aufzulösen?"
-            style="width:100%; min-height:120px;"></textarea>
+  <textarea placeholder="Was nimmst du mit – ohne es aufzulösen?"></textarea>
 </section>
 
 </main>
