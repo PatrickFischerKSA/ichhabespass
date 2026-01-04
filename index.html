@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SPASS. KONTROLLE. FREIHEIT. – Digitale Lernstrecke</title>
+  <meta name="description" content="Digitale Lernstrecke zum Republik-Text: Spass, Awareness, Resonanz, Selbstoptimierung. Provokativ, biografisch eingeordnet, mit Selbstbefragung und Export."/>
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --panel:#121623;
+      --panel2:#0f1320;
+      --text:#e8ecff;
+      --muted:#a9b1d6;
+      --line:#2a3150;
+      --accent:#8fffd2;
+      --accent2:#ff76c8;
+      --warn:#ffd27a;
+      --ok:#8fffd2;
+      --bad:#ff6b6b;
+      --shadow: 0 20px 50px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(143,255,210,.12), transparent 55%),
+        radial-gradient(900px 700px at 90% 25%, rgba(255,118,200,.10), transparent 60%),
+        radial-gradient(800px 700px at 40% 90%, rgba(255,210,122,.08), transparent 60%),
+        linear-gradient(180deg, #070911 0%, #0b0d12 55%, #070911 100%);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,13,18,.7);
+      border-bottom:1px solid rgba(42,49,80,.6);
+    }
+    .topbar{
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+      max-width:1100px; margin:0 auto;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(143,255,210,.85), rgba(143,255,210,.12) 55%, transparent 70%),
+        radial-gradient(circle at 70% 60%, rgba(255,118,200,.85), rgba(255,118,200,.10) 55%, transparent 70%),
+        linear-gradient(135deg, rgba(255,210,122,.35), rgba(18,22,35,.6));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand h1{
+      font-size:14px; margin:0;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(232,236,255,.92);
+    }
+    .brand .sub{font-size:12px; color:var(--muted); margin-top:2px}
+    .controls{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(42,49,80,.9);
+      background: rgba(18,22,35,.55);
+      color:rgba(232,236,255,.88);
+      font-size:12px;
+    }
+    .btn{
+      cursor:pointer;
+      border:1px solid rgba(42,49,80,.95);
+      background: rgba(18,22,35,.75);
+      color:rgba(232,236,255,.92);
+      padding:9px 12px;
+      border-radius:12px;
+      font-size:12px;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(18,22,35,.92); border-color: rgba(143,255,210,.35)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(143,255,210,.20), rgba(255,118,200,.16));
+      border-color: rgba(143,255,210,.40);
+    }
+    .btn.danger{border-color: rgba(255,107,107,.40)}
+    .wrap{max-width:1100px; margin:0 auto; padding:22px 18px 60px}
+    .grid{
+      display:grid; grid-template-columns: 320px 1fr;
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+    }
+    .nav{
+      position:sticky; top:78px;
+      align-self:start;
+      background: rgba(18,22,35,.55);
+      border:1px solid rgba(42,49,80,.75);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .nav header{
+      position:unset; backdrop-filter:none; background:transparent; border-bottom:none;
+    }
+    .navhead{
+      padding:16px 16px 12px;
+      border-bottom:1px solid rgba(42,49,80,.55);
+    }
+    .navhead .t{font-size:13px; letter-spacing:.10em; text-transform:uppercase}
+    .navhead .m{font-size:12px; color:var(--muted); margin-top:6px}
+    .progress{
+      height:10px; border-radius:999px; background: rgba(42,49,80,.55);
+      overflow:hidden; margin-top:12px;
+    }
+    .progress > div{
+      height:100%; width:0%;
+      background: linear-gradient(90deg, rgba(143,255,210,.85), rgba(255,118,200,.75));
+      transition: width .25s ease;
+    }
+    .navlist{padding:10px 10px 14px}
+    .navitem{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 10px;
+      border-radius:14px;
+      color:rgba(232,236,255,.90);
+      border:1px solid transparent;
+      cursor:pointer;
+      transition: background .15s ease, border-color .15s ease;
+      margin:6px 0;
+      background: rgba(15,19,32,.45);
+    }
+    .navitem:hover{background: rgba(15,19,32,.70); border-color: rgba(42,49,80,.8)}
+    .navitem.active{border-color: rgba(143,255,210,.45); background: rgba(15,19,32,.85)}
+    .tag{
+      font-size:11px; color:rgba(232,236,255,.75);
+      border:1px solid rgba(42,49,80,.7);
+      padding:4px 8px; border-radius:999px;
+      background: rgba(18,22,35,.35);
+    }
+    main{
+      background: rgba(18,22,35,.55);
+      border:1px solid rgba(42,49,80,.75);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero{
+      padding:22px;
+      border-bottom:1px solid rgba(42,49,80,.55);
+      background:
+        radial-gradient(900px 500px at 15% 20%, rgba(143,255,210,.14), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,118,200,.12), transparent 60%),
+        linear-gradient(180deg, rgba(15,19,32,.65), rgba(18,22,35,.35));
+    }
+    .hero h2{margin:0 0 10px; font-size:22px}
+    .hero p{margin:0; color:rgba(232,236,255,.86); max-width:70ch}
+    .warn{
+      margin-top:14px;
+      border:1px solid rgba(255,210,122,.35);
+      background: rgba(255,210,122,.08);
+      padding:12px 14px;
+      border-radius:16px;
+      color: rgba(255,237,200,.95);
+      font-size:13px;
+    }
+    .section{
+      padding:22px;
+      display:none;
+    }
+    .section.active{display:block}
+    .kicker{
+      letter-spacing:.14em; text-transform:uppercase;
+      font-size:12px; color:rgba(232,236,255,.75);
+    }
+    h3{margin:10px 0 10px; font-size:20px}
+    .cardrow{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 780px){
+      .cardrow{grid-template-columns: 1fr}
+    }
+    .card{
+      background: rgba(15,19,32,.55);
+      border:1px solid rgba(42,49,80,.75);
+      border-radius: var(--radius);
+      padding:16px;
+    }
+    .card h4{margin:0 0 8px; font-size:15px}
+    .muted{color:var(--muted); font-size:13px}
+    .quote{
+      margin:12px 0 0;
+      padding:12px 14px;
+      border-left:3px solid rgba(143,255,210,.55);
+      background: rgba(143,255,210,.06);
+      border-radius: 12px;
+      font-size:13px;
+      color: rgba(232,236,255,.90);
+    }
+    .bio{
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .bio img{
+      width:92px; height:116px; object-fit:cover;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(42,49,80,.25);
+      flex:0 0 auto;
+    }
+    .bio .btxt{flex:1}
+    .hr{height:1px; background: rgba(42,49,80,.55); margin:18px 0}
+    label{display:block; font-size:13px; margin:10px 0 6px; color:rgba(232,236,255,.92)}
+    input[type="text"], textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(42,49,80,.85);
+      background: rgba(11,13,18,.45);
+      color: rgba(232,236,255,.92);
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height:120px; resize:vertical}
+    .row{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top:10px;
+    }
+    .small{font-size:12px; color:rgba(232,236,255,.74)}
+    .pill2{
+      display:inline-flex; align-items:center; gap:8px;
+      border-radius:999px;
+      border:1px solid rgba(42,49,80,.8);
+      background: rgba(11,13,18,.35);
+      padding:8px 10px;
+      font-size:12px;
+      color: rgba(232,236,255,.85);
+    }
+    .scale{
+      display:grid; grid-template-columns: 1fr auto;
+      gap:12px; align-items:center;
+      margin-top:10px;
+    }
+    input[type="range"]{width:100%}
+    .val{
+      min-width:62px; text-align:right; font-variant-numeric: tabular-nums;
+      color: rgba(232,236,255,.92);
+      padding:8px 10px; border-radius:12px;
+      border:1px solid rgba(42,49,80,.7);
+      background: rgba(15,19,32,.55);
+    }
+    .twocol{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .twocol{grid-template-columns: 1fr}
+    }
+    .debate{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:10px;
+    }
+    @media (max-width: 860px){
+      .debate{grid-template-columns: 1fr}
+    }
+    .thesis{
+      border-radius: var(--radius);
+      border:1px solid rgba(42,49,80,.75);
+      background: rgba(15,19,32,.55);
+      padding:14px;
+    }
+    .thesis strong{display:block; font-size:14px}
+    .thesis .hint{margin-top:8px; color:rgba(232,236,255,.78); font-size:13px}
+    .badge{
+      display:inline-flex; align-items:center;
+      padding:4px 8px; border-radius:999px;
+      border:1px solid rgba(42,49,80,.75);
+      font-size:11px; color:rgba(232,236,255,.78);
+      background: rgba(11,13,18,.35);
+      margin-right:6px;
+    }
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      background: rgba(18,22,35,.92);
+      border:1px solid rgba(42,49,80,.95);
+      padding:10px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      color: rgba(232,236,255,.92);
+      font-size:13px;
+      display:none;
+      z-index:100;
+      max-width:min(820px, calc(100vw - 24px));
+    }
+    .toast.show{display:block}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid rgba(42,49,80,.8);
+      background: rgba(11,13,18,.35);
+    }
+    .footer{
+      padding:16px 22px;
+      border-top:1px solid rgba(42,49,80,.55);
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; align-items:center;
+      background: rgba(15,19,32,.55);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand" title="Digitale Lernstrecke – offline nutzbar (mit Einschränkungen bei externen Bildern).">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>SPASS. KONTROLLE. FREIHEIT.</h1>
+        <div class="sub">Digitale Lernstrecke · Selbstbefragung · Theorie als Sprengstoff</div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="pill" id="pillProgress">Fortschritt: <strong id="pPct">0%</strong></div>
+      <button class="btn" id="btnExport">Export (TXT)</button>
+      <button class="btn danger" id="btnReset">Reset</button>
+      <button class="btn primary" id="btnNext">Weiter ▸</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <aside class="nav" aria-label="Navigation">
+      <div class="navhead">
+        <div class="t">Module</div>
+        <div class="m">Keine Bewertung. Aber du wirst dich positionieren müssen.</div>
+        <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+      </div>
+      <div class="navlist" id="navList"></div>
+    </aside>
+
+    <main>
+      <div class="hero">
+        <div class="kicker">Ausgangspunkt</div>
+        <h2>„Ich habe Spass, ich schwör“ – aber wer kann sich das leisten?</h2>
+        <p>
+          Diese Strecke basiert auf einem Republik-Text (Nina Hurni, 01.01.2026).
+          Du arbeitest nicht auf „Textverständnis“, sondern auf <strong>Haltung</strong> – und auf die Frage,
+          ob „Spass“ heute <strong>Freiheit</strong>, <strong>Pflicht</strong> oder <strong>Risiko</strong> ist.
+        </p>
+        <div class="warn">
+          <strong>Regel:</strong> Du darfst jede Position ablehnen – aber erst, nachdem du sie <em>fair</em> eingeführt hast.
+          (Wenn du nur abwehrst, hast du hier nichts gelernt.)
+        </div>
+        <div class="row" style="margin-top:14px">
+          <span class="pill2">Tipp: nutze <span class="kbd">⌘F</span> / <span class="kbd">Strg+F</span> für deine eigenen Notizen später.</span>
+          <span class="pill2">Alles bleibt lokal in deinem Browser (LocalStorage).</span>
+        </div>
+      </div>
+
+      <!-- Sections injected by JS -->
+      <div id="sections"></div>
+
+      <div class="footer">
+        <div class="small">
+          © Lernstrecke: Unterrichtsdesign. Bilder: Wikimedia Commons (CC BY-SA). Externe Links optional.
+        </div>
+        <div class="row">
+          <button class="btn" id="btnPrev">◂ Zurück</button>
+          <button class="btn primary" id="btnNext2">Weiter ▸</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  // ============
+  // State + Utils
+  // ============
+  const STORE_KEY = "spass_lernstrecke_v1";
+  const modules = [
+    {id:"m0",  title:"Modul 0 · Selbsttest", tag:"Einstieg"},
+    {id:"m1",  title:"Modul 1 · Text als Spiegel", tag:"Irritation"},
+    {id:"m2",  title:"Modul 2 · Rosa: Resonanz", tag:"Theorie"},
+    {id:"m3",  title:"Modul 3 · Gegenposition: Kontrolle", tag:"Konflikt"},
+    {id:"m4",  title:"Modul 4 · Strömquist: Spass-Pflicht", tag:"Theorie"},
+    {id:"m5",  title:"Modul 5 · Gegenposition: Eigenverantwortung", tag:"Konflikt"},
+    {id:"m6",  title:"Modul 6 · Awareness: Befreiung vs Kontrolle", tag:"Eskalation"},
+    {id:"m7",  title:"Modul 7 · Perspektivbruch (2 Körper)", tag:"Empathie"},
+    {id:"m8",  title:"Modul 8 · Rückbindung & Re-Positionierung", tag:"Verdichtung"},
+    {id:"m9",  title:"Modul 9 · Radikale Selbstbefragung", tag:"Abschluss"},
+    {id:"m10", title:"Modul 10 · Ressourcen & GitHub", tag:"Optional"}
+  ];
+
+  const defaultState = {
+    activeIndex: 0,
+    done: {},
+    inputs: {}
+  };
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORE_KEY);
+      if(!raw) return structuredClone(defaultState);
+      const s = JSON.parse(raw);
+      return {
+        ...structuredClone(defaultState),
+        ...s,
+        done: s.done || {},
+        inputs: s.inputs || {}
+      };
+    }catch(e){
+      return structuredClone(defaultState);
+    }
+  }
+
+  function saveState(){
+    localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    updateProgressUI();
+  }
+
+  function setInput(key, value){
+    state.inputs[key] = value;
+    saveState();
+  }
+
+  function getInput(key, fallback=""){
+    return (state.inputs && key in state.inputs) ? state.inputs[key] : fallback;
+  }
+
+  function toast(msg){
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(()=> el.classList.remove("show"), 2400);
+  }
+
+  let state = loadState();
+
+  // =================
+  // UI Build: Nav + Sections
+  // =================
+  const navList = document.getElementById("navList");
+  const sectionsRoot = document.getElementById("sections");
+
+  function navItem(index){
+    const m = modules[index];
+    const div = document.createElement("div");
+    div.className = "navitem";
+    div.dataset.index = String(index);
+    div.innerHTML = `
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <div style="font-size:13px; line-height:1.2">${m.title}</div>
+        <div class="small" style="color:rgba(232,236,255,.68)">${m.tag}</div>
+      </div>
+      <div class="tag" id="tag_${m.id}">offen</div>
+    `;
+    div.addEventListener("click", ()=> goTo(index));
+    return div;
+  }
+
+  function buildNav(){
+    navList.innerHTML = "";
+    modules.forEach((_, i)=> navList.appendChild(navItem(i)));
+  }
+
+  function sectionTemplate(id, inner){
+    const s = document.createElement("section");
+    s.className = "section";
+    s.id = id;
+    s.innerHTML = inner;
+    return s;
+  }
+
+  // ============
+  // Content: Modules
+  // ============
+  const ccHartmut = "https://commons.wikimedia.org/wiki/Special:FilePath/Hartmut%20Rosa%2C%202015%20(cropped).jpg?width=600";
+  const ccLiv = "https://commons.wikimedia.org/wiki/Special:FilePath/Liv%20Str%C3%B6mquist%202019.jpg?width=600";
+
+  const sections = [];
+
+  sections.push(sectionTemplate("m0", `
+    <div class="kicker">Modul 0</div>
+    <h3>Selbsttest ohne Auswertung</h3>
+    <p class="muted">
+      Keine Note. Kein Feedback. Keine Diskussion. Du sammelst Material über dich.
+      <strong>Du brauchst es später.</strong>
+    </p>
+
+    <div class="cardrow">
+      <div class="card">
+        <h4>Mini-Check: „Spass“ (ohne Zweck)</h4>
+        <label>Wann hattest du zuletzt Spass, der keinem Zweck diente?</label>
+        <input type="text" id="in_m0_1" placeholder="z. B. albern sein, rumhängen, tanzen, blödsinnige Challenge …"/>
+        <label>Was war daran „zweckfrei“?</label>
+        <textarea id="in_m0_2" placeholder="Woran merkst du, dass es nicht nur Ablenkung / Performance war?"></textarea>
+        <div class="row">
+          <button class="btn" data-markdone="m0">Ich bin durch</button>
+          <span class="small">Tipp: kurze, echte Details = stärker.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Mini-Check: Spass als Performance</h4>
+        <label>Wann hast du Spass gezeigt, ohne ihn zu fühlen?</label>
+        <textarea id="in_m0_3" placeholder="z. B. Party, Ferien, Story posten, Gruppendruck, „alles gut“ sagen …"></textarea>
+        <label>Was war der Druck dahinter?</label>
+        <input type="text" id="in_m0_4" placeholder="z. B. dazugehören, nicht komisch wirken, Erwartungen erfüllen …"/>
+        <div class="hr"></div>
+        <p class="quote"><strong>Merksatz:</strong> Wenn du am Ende nur „Content“ produziert hast, war es vielleicht nicht Spass, sondern Arbeit.</p>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m1", `
+    <div class="kicker">Modul 1</div>
+    <h3>Der Text als Spiegel (nicht als Meinung)</h3>
+    <p class="muted">
+      Du arbeitest hier mit vier Markiercodes. Das ersetzt „Textanalyse“ durch Selbstbezug.
+      Nutze kurze Textstellen (max. 1–2 Sätze) aus dem PDF. Keine langen Zitate.
+    </p>
+
+    <div class="card">
+      <h4>Markiercodes (Pflicht)</h4>
+      <div class="row">
+        <span class="badge">🔴 trifft mich</span>
+        <span class="badge">🔵 lehne ich spontan ab</span>
+        <span class="badge">🟡 macht mich unsicher</span>
+        <span class="badge">⚫ neu für mich</span>
+      </div>
+      <label>🔴 Eine Stelle, die dich trifft (kurz paraphrasieren oder sehr kurz zitieren)</label>
+      <textarea id="in_m1_r" placeholder="Schreibe: Was genau trifft dich – und warum?"></textarea>
+
+      <label>🔵 Eine Stelle, die du spontan ablehnst</label>
+      <textarea id="in_m1_b" placeholder="Schreibe: Was lehnt dein Bauch ab? (Noch nicht diskutieren.)"></textarea>
+
+      <label>🟡 Eine Stelle, die dich unsicher macht</label>
+      <textarea id="in_m1_y" placeholder="Schreibe: Was macht dich unsicher? (Widerspruch in dir?)"></textarea>
+
+      <label>⚫ Eine Stelle, die neu für dich ist</label>
+      <textarea id="in_m1_k" placeholder="Schreibe: Was ist neu – und was könnte daran stimmen?"></textarea>
+
+      <div class="row">
+        <button class="btn" data-markdone="m1">Ich bin durch</button>
+        <span class="small">Regel: Nur Ich-Form. Keine „man“-Sätze.</span>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m2", `
+    <div class="kicker">Modul 2</div>
+    <h3>Hartmut Rosa: Warum Spass nicht machbar ist (Resonanz)</h3>
+    <div class="cardrow">
+      <div class="card">
+        <div class="bio">
+          <img src="${ccHartmut}" alt="Hartmut Rosa (CC BY-SA)"/>
+          <div class="btxt">
+            <h4>Wer ist Rosa – warum soll mich das interessieren?</h4>
+            <p class="muted">
+              Hartmut Rosa ist Soziologe (Uni Jena) und analysiert, wie Beschleunigung unser Leben prägt.
+              Er ist bekannt für „Social Acceleration“ und „Resonanz“ – eine Idee dafür, wann Weltbeziehung gelingt.
+            </p>
+            <p class="small">
+              (Bild: Wikimedia Commons, CC BY-SA. Falls offline: Bild kann fehlen – Inhalt bleibt.)
+            </p>
+          </div>
+        </div>
+        <div class="hr"></div>
+        <p class="quote">
+          <strong>Kerngedanke:</strong> Resonanz kann man nicht erzwingen. Sie passiert – wenn Bedingungen stimmen.
+          „Sei locker!“ zerstört Lockerheit.
+        </p>
+      </div>
+
+      <div class="card">
+        <h4>Starkmachen der Position (fair!)</h4>
+        <p class="muted">
+          Schreibe Rosas Position so, dass sie jemand, der sie ablehnt, trotzdem als plausibel erkennt.
+        </p>
+        <label>Rosa in 5 Sätzen – ohne Karikatur</label>
+        <textarea id="in_m2_rosa5" placeholder="5 Sätze. Kein Buzzword-Bingo. Was ist das Problem? Was ist Resonanz? Warum ist Spass unverfügbar?"></textarea>
+
+        <div class="hr"></div>
+
+        <h4>Provokation</h4>
+        <p class="muted">Wenn Spass unverfügbar ist: Warum versuchen wir ihn dauernd herzustellen?</p>
+        <label>Deine Antwort (konkret, mit Beispiel)</label>
+        <textarea id="in_m2_prov" placeholder="z. B. Alkohol, Handy, Party-Planung, Erwartungen, Story, Selbstoptimierung …"></textarea>
+
+        <div class="row">
+          <button class="btn" data-markdone="m2">Ich bin durch</button>
+        </div>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m3", `
+    <div class="kicker">Modul 3</div>
+    <h3>Gegenposition: Ohne Kontrolle kein Loslassen</h3>
+    <div class="card">
+      <h4>Starkmachen der Gegenposition</h4>
+      <p class="muted">
+        Baue die Gegenposition so auf, dass sie nicht „spassfeindlich“ wirkt, sondern realistisch:
+        Viele Menschen brauchen Sicherheit, sonst wird „Spass“ zu Risiko.
+      </p>
+
+      <div class="debate">
+        <div class="thesis">
+          <strong>These A (Sicherheit als Voraussetzung)</strong>
+          <div class="hint">
+            „Ich kann erst loslassen, wenn ich glaube, dass Grenzen respektiert werden.“
+          </div>
+          <label>Beispiel aus deinem Leben</label>
+          <textarea id="in_m3_a_ex" placeholder="Ein konkreter Moment: Raum, Situation, Gefühl, was hat geholfen / gefehlt?"></textarea>
+        </div>
+
+        <div class="thesis">
+          <strong>Einwand gegen A (Sicherheit als Kontrolle)</strong>
+          <div class="hint">
+            „Zu viel Regelbewusstsein macht verkrampft. Spontanität stirbt.“
+          </div>
+          <label>Starker Einwand (fair!)</label>
+          <textarea id="in_m3_a_contra" placeholder="Schreibe einen Einwand, den du selbst ernst nehmen würdest."></textarea>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <h4>Skala-Positionierung</h4>
+      <div class="scale">
+        <input type="range" min="0" max="100" step="1" id="rng_m3"/>
+        <div class="val" id="rng_m3_val">50</div>
+      </div>
+      <div class="small">0 = Sicherheit killt Spass · 100 = Sicherheit macht Spass erst möglich</div>
+
+      <label>Begründung (Pflicht): Warum genau diese Zahl?</label>
+      <textarea id="in_m3_scale_reason" placeholder="Wenn du nur ‚kommt drauf an‘ schreibst, ist das Ausweichen. Nenne Bedingungen."></textarea>
+
+      <div class="row">
+        <button class="btn" data-markdone="m3">Ich bin durch</button>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m4", `
+    <div class="kicker">Modul 4</div>
+    <h3>Liv Strömquist: Wenn Spass zur Pflicht wird</h3>
+
+    <div class="cardrow">
+      <div class="card">
+        <div class="bio">
+          <img src="${ccLiv}" alt="Liv Strömquist (CC BY-SA)"/>
+          <div class="btxt">
+            <h4>Wer ist Strömquist – warum knallt das?</h4>
+            <p class="muted">
+              Strömquist ist eine schwedische Comiczeichnerin und Radiomacherin.
+              Sie arbeitet essayistisch: Theorie + Popkultur + Satire + Forschung.
+              Ihre Pointe: Gesellschaft verkauft dir Lösungen – und du hältst dich selbst für das Problem.
+            </p>
+            <p class="small">Bild: Wikimedia Commons, CC BY-SA.</p>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <p class="quote">
+          <strong>Kerngedanke:</strong> „Spass“ wird zum Produkt und zur Leistung.
+          Wenn du ihn nicht hinkriegst, fühlt sich das an wie persönliches Versagen – statt wie Systemfrage.
+        </p>
+      </div>
+
+      <div class="card">
+        <h4>Starkmachen der Position (fair!)</h4>
+        <label>Strömquist in 5 Sätzen – ohne „woke“-Abwehr</label>
+        <textarea id="in_m4_liv5" placeholder="5 Sätze. Worin liegt die Kritik? Was wird verkauft? Was passiert psychologisch?"></textarea>
+
+        <div class="hr"></div>
+
+        <h4>Provokation</h4>
+        <p class="muted">
+          Wenn „Self-Care“ oft nur Individualisierung ist: Was wäre „Spass“ als Widerstand?
+        </p>
+        <label>Deine Antwort (konkret: welche Praxis, welcher Raum, welche Regeln?)</label>
+        <textarea id="in_m4_resist" placeholder="z. B. Gemeinschaft, alkoholfrei, andere Partyform, Rückzug, Intimität, queerfeministische Räume …"></textarea>
+
+        <div class="row">
+          <button class="btn" data-markdone="m4">Ich bin durch</button>
+        </div>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m5", `
+    <div class="kicker">Modul 5</div>
+    <h3>Gegenposition: Eigenverantwortung ist nicht böse</h3>
+
+    <div class="card">
+      <h4>Starkmachen der Gegenposition</h4>
+      <p class="muted">
+        Diese Gegenposition ist nicht „neoliberal“ per se:
+        Sie sagt: Menschen haben Handlungsspielräume. Nicht alles ist System. Sonst wird man ohnmächtig.
+      </p>
+
+      <div class="twocol">
+        <div class="card" style="margin:0">
+          <h4>Stimme A: „Ich entscheide selbst“</h4>
+          <label>Schreibe A so, dass A kompetent wirkt (nicht dumm).</label>
+          <textarea id="in_m5_a" placeholder="A argumentiert: Verantwortung, Prioritäten, Grenzen setzen, Social Media bewusst nutzen …"></textarea>
+        </div>
+
+        <div class="card" style="margin:0">
+          <h4>Stimme B: „Du entscheidest nie allein“</h4>
+          <label>Schreibe B so, dass B fair ist (nicht Opferpose).</label>
+          <textarea id="in_m5_b" placeholder="B argumentiert: Strukturen, Normen, Druck, Ausschlüsse, Algorithmus, Geschlecht/Rassismus …"></textarea>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <h4>Du musst dich entscheiden (vorläufig)</h4>
+      <label>Welche Stimme ist im Moment stärker – und warum?</label>
+      <textarea id="in_m5_pick" placeholder="Wähle A, B oder ‚beides‘ – aber begründe."></textarea>
+
+      <div class="row">
+        <button class="btn" data-markdone="m5">Ich bin durch</button>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m6", `
+    <div class="kicker">Modul 6</div>
+    <h3>Awareness: Befreiung oder Kontrolle?</h3>
+
+    <div class="card">
+      <p class="muted">
+        Jetzt wird’s ernst: Du arbeitest mit zwei Thesen, die beide plausibel sein müssen.
+        <strong>Du darfst nicht flüchten.</strong>
+      </p>
+
+      <div class="debate">
+        <div class="thesis">
+          <strong>These 1: Awareness schützt Spass</strong>
+          <div class="hint">
+            „Ohne Grenzen und Unterstützung ist ‚Spass‘ für viele nur Gefahr. Awareness schafft Bedingungen.“
+          </div>
+          <label>Starkmachen: Warum ist das überzeugend?</label>
+          <textarea id="in_m6_t1" placeholder="Nenne: Wer profitiert? Was wird möglich? Welche Kosten entstehen?"></textarea>
+        </div>
+
+        <div class="thesis">
+          <strong>These 2: Awareness macht verkrampft</strong>
+          <div class="hint">
+            „Wenn jede Begegnung potenziell falsch ist, wird Nähe riskant. Spontanität stirbt.“
+          </div>
+          <label>Starkmachen: Warum ist das überzeugend?</label>
+          <textarea id="in_m6_t2" placeholder="Nenne: Wo entsteht Unsicherheit? Welche Nebenwirkungen? Was wird ungesagt?"></textarea>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <h4>Du musst einen starken Einwand formulieren</h4>
+      <label>Wähle EINE These, die du eher vertrittst – und schreibe den stärksten Einwand dagegen.</label>
+      <textarea id="in_m6_strong_contra" placeholder="Regel: Kein Strohmann. Einwand muss wirklich weh tun."></textarea>
+
+      <div class="row">
+        <button class="btn" data-markdone="m6">Ich bin durch</button>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m7", `
+    <div class="kicker">Modul 7</div>
+    <h3>Perspektivbruch: Derselbe Abend – zwei Körper</h3>
+
+    <div class="card">
+      <p class="muted">
+        Du beschreibst denselben Abend aus zwei Perspektiven.
+        Ziel: merken, dass „Bubble“ nicht für alle dasselbe bedeutet.
+      </p>
+
+      <label>Körper 1 (Rolle wählen)</label>
+      <input type="text" id="in_m7_role1" placeholder="z. B. queer Person / Frau allein / neurodivergent / Security / Awareness-Team / betrunkener Mann …"/>
+
+      <label>Szene: Was ist Spass hier – und wo kippt es?</label>
+      <textarea id="in_m7_scene1" placeholder="Konkrete Sinneseindrücke, Grenzen, Blicke, Musik, Nähe, Angst/Leichtigkeit …"></textarea>
+
+      <div class="hr"></div>
+
+      <label>Körper 2 (andere Rolle!)</label>
+      <input type="text" id="in_m7_role2" placeholder="Muss deutlich anders sein als Körper 1."/>
+
+      <label>Dieselbe Szene, aber anders erlebt</label>
+      <textarea id="in_m7_scene2" placeholder="Was ist hier normal? Was ist bedrohlich? Was wird übersehen?"></textarea>
+
+      <div class="row">
+        <button class="btn" data-markdone="m7">Ich bin durch</button>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m8", `
+    <div class="kicker">Modul 8</div>
+    <h3>Rückbindung: Re-Positionierung (du bist nicht mehr am Anfang)</h3>
+
+    <div class="card">
+      <p class="muted">
+        Kehre zu deinen Markierungen aus Modul 1 zurück. Jetzt wird sichtbar, ob Theorie dich verschoben hat.
+      </p>
+
+      <label>✔️ Wo stimmst du jetzt bewusster zu?</label>
+      <textarea id="in_m8_yes" placeholder="Nenne 1–2 Punkte + warum (mit Bezug auf Rosa/Strömquist oder Awareness-Konflikt)."></textarea>
+
+      <label>❌ Wo widersprichst du jetzt bewusster?</label>
+      <textarea id="in_m8_no" placeholder="Nenne 1–2 Punkte + warum. (Nicht einfach: ‚find ich doof‘.)"></textarea>
+
+      <label>⚡ Wo bist du gespaltener als zuvor?</label>
+      <textarea id="in_m8_split" placeholder="Spaltung = Lernmoment. Beschreibe den Widerspruch in dir."></textarea>
+
+      <div class="row">
+        <button class="btn" data-markdone="m8">Ich bin durch</button>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m9", `
+    <div class="kicker">Modul 9</div>
+    <h3>Radikale Selbstbefragung (privat)</h3>
+
+    <div class="card">
+      <p class="muted">
+        Dieser Teil ist nicht zum Abgeben gedacht. Du kannst ihn exportieren – oder löschen.
+      </p>
+
+      <label>Wo vermeidest du Spass aus Angst – und wovor genau?</label>
+      <textarea id="in_m9_q1"></textarea>
+
+      <label>Wo gefährdest du andere (auch minimal) aus Lust / Unachtsamkeit?</label>
+      <textarea id="in_m9_q2"></textarea>
+
+      <label>Welche Räume bräuchtest du, damit du dich gehen lassen könntest?</label>
+      <textarea id="in_m9_q3"></textarea>
+
+      <label>Was müsste sich eher ändern: an dir – oder um dich herum?</label>
+      <textarea id="in_m9_q4"></textarea>
+
+      <div class="quote">
+        <strong>Letzter Satz:</strong> Wenn du jetzt keine klare Antwort hast, war die Lernstrecke erfolgreich.
+      </div>
+
+      <div class="row">
+        <button class="btn primary" data-markdone="m9">Ich bin durch</button>
+      </div>
+    </div>
+  `));
+
+  sections.push(sectionTemplate("m10", `
+    <div class="kicker">Modul 10</div>
+    <h3>Ressourcen & GitHub (optional, aber oft sinnvoll)</h3>
+
+    <div class="cardrow">
+      <div class="card">
+        <h4>Ressourcen (direkt nutzbar)</h4>
+        <p class="muted">
+          Für diese Lernstrecke reichen die Inhalte hier. Wenn du vertiefen willst, nutze diese Suchpfade:
+        </p>
+        <ul class="muted">
+          <li><strong>Rosa:</strong> „Hartmut Rosa Resonanz Erklärung Musik Beziehung“</li>
+          <li><strong>Rosa:</strong> „Hartmut Rosa Beschleunigung Alltag Schule Social Media“</li>
+          <li><strong>Strömquist:</strong> „Das Orakel spricht Liv Strömquist Selbstoptimierung Kritik“</li>
+          <li><strong>Awareness:</strong> „Awareness Konzept Betroffenenperspektive Definition“</li>
+          <li><strong>Schweiz-Bezug:</strong> „Taktvoll Sicherheitskultur Awareness Schweiz“</li>
+        </ul>
+        <div class="quote">
+          Tipp: Lass Lernende je einen Fund einbringen – aber nur, wenn sie ihn <strong>fair zusammenfassen</strong>
+          und den <strong>besten Einwand</strong> dagegen formulieren.
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Warum GitHub hier sinnvoll sein kann</h4>
+        <p class="muted">
+          Wenn du die Datei nur lokal öffnest, kann es je nach Browser/Schule Einschränkungen geben:
+          externe Bilder, Links, Caching, Updates.
+          GitHub Pages macht die Lernstrecke <strong>für die Klasse stabil erreichbar</strong>.
+        </p>
+
+        <h4>Quick-Setup (GitHub Pages)</h4>
+        <ol class="muted">
+          <li>Neues Repository erstellen (z. B. <span class="kbd">spass-kontrolle-freiheit</span>).</li>
+          <li>Diese Datei als <span class="kbd">index.html</span> hochladen.</li>
+          <li>Settings → Pages → „Deploy from branch“ → Branch <span class="kbd">main</span> / root.</li>
+          <li>Link teilen.</li>
+        </ol>
+
+        <div class="hr"></div>
+
+        <h4>Offline-Hinweis</h4>
+        <p class="muted">
+          Die Portraits werden von Wikimedia geladen. Offline funktionieren sie nicht.
+          (Die Lernstrecke selbst funktioniert trotzdem.)
+        </p>
+      </div>
+    </div>
+  `));
+
+  // Mount sections
+  sections.forEach(s => sectionsRoot.appendChild(s));
+
+  // ============
+  // Wiring inputs to state
+  // ============
+  function bind(){
+    const ids = [
+      "in_m0_1","in_m0_2","in_m0_3","in_m0_4",
+      "in_m1_r","in_m1_b","in_m1_y","in_m1_k",
+      "in_m2_rosa5","in_m2_prov",
+      "in_m3_a_ex","in_m3_a_contra","rng_m3","in_m3_scale_reason",
+      "in_m4_liv5","in_m4_resist",
+      "in_m5_a","in_m5_b","in_m5_pick",
+      "in_m6_t1","in_m6_t2","in_m6_strong_contra",
+      "in_m7_role1","in_m7_scene1","in_m7_role2","in_m7_scene2",
+      "in_m8_yes","in_m8_no","in_m8_split",
+      "in_m9_q1","in_m9_q2","in_m9_q3","in_m9_q4"
+    ];
+
+    ids.forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      if(el.type === "range"){
+        el.value = getInput(id, "50");
+        const v = document.getElementById(id+"_val");
+        if(v) v.textContent = el.value;
+        el.addEventListener("input", ()=>{
+          if(v) v.textContent = el.value;
+          setInput(id, el.value);
+        });
+      }else{
+        el.value = getInput(id, "");
+        el.addEventListener("input", ()=> setInput(id, el.value));
+      }
+    });
+
+    document.querySelectorAll("[data-markdone]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const mid = btn.getAttribute("data-markdone");
+        state.done[mid] = true;
+        saveState();
+        updateNavTags();
+        toast("Markiert: erledigt ✔");
+      });
+    });
+  }
+
+  // ============
+  // Navigation & Progress
+  // ============
+  function goTo(index){
+    state.activeIndex = Math.max(0, Math.min(modules.length-1, index));
+    saveState();
+    render();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  function render(){
+    document.querySelectorAll(".section").forEach(s=> s.classList.remove("active"));
+    const active = modules[state.activeIndex].id;
+    const sec = document.getElementById(active);
+    if(sec) sec.classList.add("active");
+
+    document.querySelectorAll(".navitem").forEach(n=> n.classList.remove("active"));
+    const nav = document.querySelector(`.navitem[data-index="${state.activeIndex}"]`);
+    if(nav) nav.classList.add("active");
+
+    updateNavTags();
+    updateProgressUI();
+  }
+
+  function updateNavTags(){
+    modules.forEach(m=>{
+      const t = document.getElementById("tag_"+m.id);
+      if(!t) return;
+      const done = !!state.done[m.id];
+      t.textContent = done ? "erledigt" : "offen";
+      t.style.borderColor = done ? "rgba(143,255,210,.45)" : "rgba(42,49,80,.75)";
+      t.style.color = done ? "rgba(143,255,210,.95)" : "rgba(232,236,255,.75)";
+    });
+  }
+
+  function updateProgressUI(){
+    const total = modules.length;
+    const doneCount = Object.values(state.done).filter(Boolean).length;
+    const pct = Math.round((doneCount / total) * 100);
+    document.getElementById("pPct").textContent = pct + "%";
+    document.getElementById("bar").style.width = pct + "%";
+  }
+
+  // ============
+  // Export / Reset / Prev Next
+  // ============
+  function exportTxt(){
+    const lines = [];
+    lines.push("SPASS. KONTROLLE. FREIHEIT. – Export");
+    lines.push("===================================");
+    lines.push("");
+    lines.push("Fortschritt: " + document.getElementById("pPct").textContent);
+    lines.push("");
+
+    modules.forEach(m=>{
+      lines.push("## " + m.title);
+      lines.push("Status: " + (state.done[m.id] ? "erledigt" : "offen"));
+      lines.push("");
+
+      // dump inputs relevant to module id
+      const prefix = "in_" + m.id.replace("m","m");
+      Object.keys(state.inputs).forEach(k=>{
+        // group roughly by module number in key (m0, m1, ...)
+        if(k.includes(m.id)){
+          lines.push("- " + k + ":");
+          lines.push(String(state.inputs[k]||"").trim() ? String(state.inputs[k]).trim() : "(leer)");
+          lines.push("");
+        }
+      });
+      // also include range
+      if(("rng_"+m.id) in state.inputs){
+        lines.push("- rng_"+m.id + ": " + state.inputs["rng_"+m.id]);
+        lines.push("");
+      }
+      lines.push("");
+    });
+
+    const blob = new Blob([lines.join("\n")], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "lernstrecke_spass_kontrolle_freiheit_export.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    toast("Export heruntergeladen.");
+  }
+
+  function resetAll(){
+    if(!confirm("Wirklich alles löschen? (Alle Notizen/Markierungen gehen verloren)")) return;
+    localStorage.removeItem(STORE_KEY);
+    state = loadState();
+    buildNav();
+    bind();
+    render();
+    toast("Reset erledigt.");
+  }
+
+  document.getElementById("btnExport").addEventListener("click", exportTxt);
+  document.getElementById("btnReset").addEventListener("click", resetAll);
+  document.getElementById("btnPrev").addEventListener("click", ()=> goTo(state.activeIndex-1));
+  document.getElementById("btnNext").addEventListener("click", ()=> goTo(state.activeIndex+1));
+  document.getElementById("btnNext2").addEventListener("click", ()=> goTo(state.activeIndex+1));
+
+  // Init
+  buildNav();
+  bind();
+  render();
+</script>
+</body>
+</html>
